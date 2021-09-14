@@ -41,7 +41,6 @@ body{
 .form{
     position: relative;
     padding: 40px 40px;
-    animation: iniciar 1.6s ease-out;
     pointer-events: all;
 }
 

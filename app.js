@@ -14,11 +14,12 @@ let validPassword2 = false
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     isValid()
+    checkInputs()
 })
 
 username.addEventListener('keyup', () =>{
 
-    if(username.value.length < 6 || username.value.length == ''){
+    if(username.value.length < 6 || username.value === ''){
         setErrorFor(username, 'Usuario deve possuir no mínimo 6 caracteres!')
         validUsername = false
     } else{
@@ -36,7 +37,7 @@ username.addEventListener('blur', () =>{
 })
 
 email.addEventListener('keyup', () =>{
-    if(!isEmail(email.value) || email.value == ''){
+    if(!isEmail(email.value) || email.value === ''){
         setErrorFor(email, 'Digite um email válido!')
         validEmail = false
     }else{
@@ -55,7 +56,7 @@ email.addEventListener('blur', () =>{
 
 password.addEventListener('keyup', () =>{
 
-    if(password.value.length < 8 || password.value == ''){
+    if(password.value.length < 8 || password.value === ''){
         setErrorFor(password, 'Senha deve ter no mínimo 8 caracteres!')
         validPassword = false
     }else{
@@ -74,7 +75,7 @@ password.addEventListener('blur', () =>{
 
 password2.addEventListener('keyup', () =>{
 
-    if(password2.value != password.value || password2.value == ''){
+    if(password2.value != password.value || password2.value === ''){
         setErrorFor(password2, 'Senhas não correspondem!')
         validPassword2 = false
     }
@@ -83,6 +84,46 @@ password2.addEventListener('keyup', () =>{
         validPassword2 = true
     }
 })
+
+function checkInputs(){
+    //Dá um get nos inputs
+    const usernameValue = username.value.trim()
+    const emailValue = email.value.trim()
+    const passwordValue = password.value.trim()
+    const password2Value = password2.value.trim()
+
+    if(usernameValue === ''){
+        setErrorFor(username, 'Usuário não pode ser vazio!')
+    } else{
+        setSuccessFor(username)
+    }
+
+    if(emailValue === ''){
+        setErrorFor(email, 'Email não pode ser vazio!')
+    } else if(!isEmail(emailValue)){
+        setErrorFor(email, 'Email não é valido!')
+    } else{
+        setSuccessFor(email)
+    }
+
+    if(passwordValue === ''){
+        setErrorFor(password, 'Senha não pode ser vazia!')
+    }else{
+        setSuccessFor(password)
+    }
+
+    if(password2Value === ''){
+        setErrorFor(password2, 'Senha não pode ser vazia!')
+    }
+    
+    else if(passwordValue !== password2Value){
+        setErrorFor(password2, 'As senhas não correspondem!')
+    }
+
+    else{
+        setSuccessFor(password2) 
+    }
+}
 
 password2.addEventListener('blur', () =>{
 
