@@ -4,74 +4,87 @@ const email = document.getElementById('email')
 const password = document.getElementById('password')
 const password2 = document.getElementById('password2')
 
+let validUsername = false
+let validEmail = false
+let validPassword = false
+let validPassword2 = false
+
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-
     checkInputs()
+    isValid()
 })
 
-    username.addEventListener('keypress', () =>{
+let msgError = document.querySelector('#msgError')
+let msgSuccess = document.querySelector('#msgSuccess')
 
-        if(username.value.length < 6){
-            setErrorFor(username, 'Usuario deve possuir mais de 6 caracteres!')
-        } else{
-            setSuccessFor(username)
-        }
-    })
+username.addEventListener('keyup', () =>{
 
-    username.addEventListener('blur', () =>{
+    if(username.value.length < 6 || username.value.length == ''){
+        setErrorFor(username, 'Usuario deve possuir no mínimo 6 caracteres!')
+    } else{
+        setSuccessFor(username)
+        validUsername = true
+    }
+})
 
-        if(username.value === ''){
-            setErrorFor(username, 'Usuário não pode ser vazio!')
-        }
-    })
+username.addEventListener('blur', () =>{
 
-    email.addEventListener('keypress', () =>{
-        if(!isEmail(email.value)){
-            setErrorFor(email, 'Email inválido!')
-        }else{
-            setSuccessFor(email)
-        }
-    })
+    if(username.value === ''){
+        setErrorFor(username, 'Usuário não pode ser vazio!')
+    }
+})
 
-    email.addEventListener('blur', () =>{
+email.addEventListener('keyup', () =>{
+    if(!isEmail(email.value)){
+        setErrorFor(email, 'Digite um email válido!')
+    }else{
+        setSuccessFor(email)
+        validEmail = true
+    }
+})
 
-        if(email.value === ''){
-            setErrorFor(email, 'Email não pode ser vazio!')
-        }
-    })
+email.addEventListener('blur', () =>{
 
-    password.addEventListener('keypress', () =>{
+    if(email.value === ''){
+        setErrorFor(email, 'Email não pode ser vazio!')
+    }
+})
 
-        if(password.value.length < 7){
-            setErrorFor(password, 'Senha deve ter no mínimo 8 caracteres!')
-        }else{
-            setSuccessFor(password)
-        }
-    })
+password.addEventListener('keyup', () =>{
 
-    password.addEventListener('blur', () =>{
+    if(password.value.length < 7){
+        setErrorFor(password, 'Senha deve ter no mínimo 8 caracteres!')
+    }else{
+        setSuccessFor(password)
+        validPassword = true
+    }
+})
 
-        if(password.value === ''){
-            setErrorFor(password, 'Senha não pode ser vazia!')
-        }
-    })
+password.addEventListener('blur', () =>{
 
-    password2.addEventListener('keypress', () =>{
+    if(password.value === ''){
+        setErrorFor(password, 'Senha não pode ser vazia!')
+    }
+})
 
-        if(password2.value.length < 7){
-            setErrorFor(password2, 'Senha deve ter no mínimo 8 caracteres!')
-        }else{
-            setSuccessFor(password2)
-        }
-    })
+password2.addEventListener('keyup', () =>{
 
-    password2.addEventListener('blur', () =>{
+    if(password2.value != password.value){
+        setErrorFor(password2, 'Senhas não correspondem!')
+    }
+    else{
+        setSuccessFor(password2)
+        validPassword2 = true
+    }
+})
 
-        if(password2.value === ''){
-            setErrorFor(password2, 'Senha não pode ser vazia!')
-        }
-    })
+password2.addEventListener('blur', () =>{
+
+    if(password2.value === ''){
+        setErrorFor(password2, 'Senha não pode ser vazia!')
+    }
+})
 
 function checkInputs(){
     //Dá um get nos inputs
@@ -103,13 +116,31 @@ function checkInputs(){
     if(password2Value === ''){
         setErrorFor(password2, 'Senha não pode ser vazia!')
     }
-    
+
     else if(passwordValue !== password2Value){
         setErrorFor(password2, 'As senhas não correspondem!')
     }
 
     else{
-        setSuccessFor(password2) 
+        setSuccessFor(password2)
+    }
+}
+
+function isValid(){
+    if(validUsername && validEmail && validPassword && validPassword2){
+        msgSuccess.setAttribute('style', 'display: block')
+        msgSuccess.innerHTML = 'Enviado com sucesso!'
+        msgError.setAttribute('style', 'display: none')
+        msgError.innerHTML = ''
+
+        setTimeout(() =>{
+            window.location.reload()
+        }, 2000)
+    }else{
+        msgError.setAttribute('style', 'display: block')
+        msgError.innerHTML = 'Erro ao cadastrar!'
+        msgSuccess.setAttribute('style', 'display: none')
+        msgSuccess.innerHTML = ''
     }
 }
 

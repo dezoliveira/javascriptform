@@ -23,6 +23,7 @@ body{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     width: 400px;
+    height: 650px;
     max-width: 100%;
 }
 
@@ -38,7 +39,8 @@ body{
 }
 
 .form{
-    padding: 30px 40px;
+    position: relative;
+    padding: 40px 40px;
     animation: iniciar 1.6s ease-out;
     pointer-events: all;
 }
@@ -141,4 +143,32 @@ body{
 
 .sign-in a:hover{
     text-decoration: underline;
+}
+
+#msgError{
+    position: absolute;
+    display: none;
+    top: 0;
+    width: 320px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center; 
+    color: rgb(255, 245, 245);
+    background-color: #e74d3cb6;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#msgSuccess{ 
+    position: absolute;
+    display: none;
+    top: 0;
+    width: 320px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;  
+    color: rgb(255, 245, 245);
+    background-color: #2ecc70c7;
+    padding: 10px;
+    border-radius: 4px;
 }
