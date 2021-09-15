@@ -146,6 +146,11 @@ function isValid(){
     }else{
         msgError.setAttribute('style', 'display: block')
         msgError.innerHTML = 'Erro ao cadastrar!'
+
+        setTimeout(() =>{
+            msgError.setAttribute('style', 'display: none')
+        }, 2000)
+
         msgSuccess.setAttribute('style', 'display: none')
         msgSuccess.innerHTML = ''
     }

@@ -171,3 +171,10 @@ body{
     padding: 10px;
     border-radius: 4px;
 }
+
+@media screen and (max-width: 360px) {
+    #msgError,
+    #msgSuccess{
+        width: 280px;
+    } 
+}
